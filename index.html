@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Tiempo y Tareas</title>
+    <style>
+        body {
+            font-family: 'Arimo', sans-serif;
+            background-color: #E5EBF4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .output {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        #cta {
+            color: #22C0DC;
+            margin-top: 20px;
+            text-align: center;
+        }
+        #cta button {
+            background-color: #01BD39;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #cta button:hover {
+            background-color: #019B31;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Calculadora de Tiempo y Tareas</h1>
+    <p>Introduce tus tareas, la duración estimada y su prioridad para organizar tu día de manera eficiente.</p>
+
+    <div class="section">
+        <label for="taskName">Nombre de la tarea:</label>
+        <input type="text" id="taskName" style="width: 100%;" placeholder="Ejemplo: Responder correos">
+    </div>
+
+    <div class="section">
+        <label for="taskDuration">Duración estimada (en minutos):</label>
+        <input type="number" id="taskDuration" style="width: 100%;" placeholder="Ejemplo: 30">
+    </div>
+
+    <div class="section">
+        <label for="taskPriority">Prioridad:</label>
+        <select id="taskPriority" style="width: 100%;">
+            <option value="urgenteImportante">Urgente e Importante</option>
+            <option value="importanteNoUrgente">Importante pero No Urgente</option>
+            <option value="urgenteNoImportante">Urgente pero No Importante</option>
+            <option value="niUrgenteNiImportante">Ni Urgente ni Importante</option>
+        </select>
+    </div>
+
+    <button onclick="addTask()">Añadir Tarea</button>
+
+    <div class="section output" id="taskList" style="display:none;">
+        <h2>Tareas Organizadas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tarea</th>
+                    <th>Duración (min)</th>
+                    <th>Prioridad</th>
+                    <th>Recomendaciones</th>
+                </tr>
+            </thead>
+            <tbody id="taskTable"></tbody>
+        </table>
+    </div>
+
+    <div id="cta">
+        <p>Descubre el Secreto de Reinventarse Profesionalmente en Solo 14 Días</p>
+        <button onclick="window.location.href='https://klicana.work/Ecpzgd'">
+            ¡SÍ! INSCRIBIRME EN “ASISTENTE VIRTUAL EN 14 DÍAS”
+        </button>
+    </div>
+
+    <script>
+        function addTask() {
+            const taskName = document.getElementById('taskName').value.trim();
+            const taskDuration = document.getElementById('taskDuration').value.trim();
+            const taskPriority = document.getElementById('taskPriority').value;
+
+            if (!taskName || !taskDuration) {
+                alert('Por favor, completa todos los campos.');
+                return;
+            }
+
+            const priorityLabels = {
+                urgenteImportante: 'Urgente e Importante',
+                importanteNoUrgente: 'Importante pero No Urgente',
+                urgenteNoImportante: 'Urgente pero No Importante',
+                niUrgenteNiImportante: 'Ni Urgente ni Importante'
+            };
+
+            const recommendations = {
+                urgenteImportante: 'Completa estas tareas de inmediato para evitar problemas mayores.',
+                importanteNoUrgente: 'Planifica estas tareas para un momento adecuado, priorizando calidad.',
+                urgenteNoImportante: 'Considera delegar estas tareas si es posible.',
+                niUrgenteNiImportante: 'Evalúa si estas tareas son necesarias o elimina las que no aportan valor.'
+            };
+
+            const taskTable = document.getElementById('taskTable');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${taskName}</td>
+                <td>${taskDuration}</td>
+                <td>${priorityLabels[taskPriority]}</td>
+                <td>${recommendations[taskPriority]}</td>
+            `;
+            taskTable.appendChild(newRow);
+
+            document.getElementById('taskList').style.display = 'block';
+            document.getElementById('taskName').value = '';
+            document.getElementById('taskDuration').value = '';
+            document.getElementById('taskPriority').value = 'urgenteImportante';
+        }
+    </script>
+</body>
+</html>
